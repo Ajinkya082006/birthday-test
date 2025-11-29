@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday!</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #ffe6ff 0, #ffd1dc 40%, #ff9a9e 100%);
+      overflow: hidden;
+    }
+
+    .card {
+      position: relative;
+      text-align: center;
+      padding: 40px 30px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+      max-width: 450px;
+      width: 90%;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .title {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #ff4b95, #ffb347, #7f7fff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .name {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: #ff4b5c;
+    }
+
+    .message {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #444;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 24px;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff4b95, #ffb347);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(255, 75, 149, 0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 10px 24px rgba(255, 75, 149, 0.5);
+    }
+
+    .btn:active {
+      transform: translateY(0) scale(0.97);
+      box-shadow: 0 6px 14px rgba(255, 75, 149, 0.35);
+    }
+
+    .small-text {
+      margin-top: 14px;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    /* Balloons */
+    .balloon {
+      position: absolute;
+      width: 50px;
+      height: 70px;
+      border-radius: 50% 50% 45% 45%;
+      background: #ff6b81;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+      animation: floatUp 7s linear infinite;
+      opacity: 0.85;
+    }
+
+    .balloon::after {
+      content: "";
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background: #666;
+      transform: translateX(-50%);
+    }
+
+    .balloon:nth-child(1) {
+      left: -40px;
+      background: #ff6b81;
+      animation-delay: 0s;
+    }
+
+    .balloon:nth-child(2) {
+      right: -40px;
+      background: #ffd166;
+      animation-delay: 1.2s;
+    }
+
+    .balloon:nth-child(3) {
+      left: 50%;
+      transform: translateX(-50%);
+      background: #70d6ff;
+      animation-delay: 2.4s;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: -10px;
+      width: 8px;
+      height: 14px;
+      background: #ff9a9e;
+      opacity: 0.8;
+      animation: fall 3.5s linear infinite;
+    }
+
+    .confetti:nth-child(odd) {
+      border-radius: 50%;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(80px);
+      }
+      100% {
+        transform: translateY(-150px);
+      }
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(110vh) rotate(320deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- Decorative balloons -->
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+
+    <h1 class="title">Happy Birthday!</h1>
+    <h2 class="name">Moksha 🎉</h2>
+    <!-- Change "Dear Friend" to any name you want -->
+
+    <p class="message">
+      “Happy Birthday to the sweetest girl Moksha baby...❤️
+      I pray you always stay happy, healthy, and full of dreams. 
+      Love you, little princess ❤️🎂✨”
+    </p>
+
+    <button class="btn" onclick="showWish()">
+      Click for a special wish
+    </button>
+
+    <p class="small-text" id="extraWish"></p>
+  </div>
+
+  <script>
+    // Simple “special wish” text
+    function showWish() {
+      const extra = document.getElementById("extraWish");
+      extra.textContent = "You are truly special. Thanks for being you. ✨";
+    }
+
+    // Generate basic confetti
+    const colors = ["#ff9a9e", "#ffb347", "#7f7fff", "#9b5de5", "#f15bb5", "#00bbf9", "#00f5d4"];
+    for (let i = 0; i < 80; i++) {
+      const piece = document.createElement("div");
+      piece.classList.add("confetti");
+      piece.style.left = Math.random() * 100 + "vw";
+      piece.style.animationDelay = Math.random() * 3 + "s";
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.width = (5 + Math.random() * 5) + "px";
+      piece.style.height = (8 + Math.random() * 10) + "px";
+      document.body.appendChild(piece);
+    }
+  </script>
+
+</body>
+</html>
